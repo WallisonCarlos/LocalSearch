@@ -1,0 +1,2 @@
+# LocalSearch
+LocalSearch N-Queens
