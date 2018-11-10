@@ -3,27 +3,25 @@
 
 #include <State.h>
 #include <limits.h>
-#include <vector>
+#include <queue>
 
 typedef struct HillClimbing {
 
     State search (State start) {
 
         State currentState = start;
-        int i = 0;
+
         while (true) {
-            //printf("------------------------%d Cycle States -------------------------\n", i);
-            std::vector<State> successors = currentState.successors();
+
             int nextVal = INT_MAX;
-
             State nextState;
+            State s = successor(currentState);
 
-            for (unsigned int i = 0;i < successors.size();i++) {
-                State s = successors[i];
-                if (s.getHeuristic() < nextVal) {
-                    nextState = s;
-                    nextVal = s.getHeuristic();
-                }
+            if (s.getHeuristic() < nextVal) {
+
+                nextState = s;
+                nextVal = s.getHeuristic();
+
             }
 
             /*printf("--------------------Estado escolhido: --------------------\n");
@@ -34,14 +32,39 @@ typedef struct HillClimbing {
             if (nextVal >= currentState.getHeuristic()) {
                 return currentState;
             }
-
             currentState = nextState;
-            i++;
-            if (i == 5) {
-                getchar();
-            }
         }
     }
+
+    State successor(State state) {
+
+        State successor = state;
+        int b[state.size];
+
+        for (unsigned int i = 0;i < state.size;i++) {
+
+            utils.copy(b, state.board, state.size);
+
+            for (unsigned int j = 0;j < state.size;j++) {
+
+                if (!(b[i] == j)) {
+
+                    b[i] = j;
+                    State next(state.size, b);
+
+                    if (next.getHeuristic() < state.getHeuristic()) {
+                        successor = next;
+                    }
+
+                }
+
+            }
+
+        }
+
+        return successor;
+    }
+
 
 } HillClimbing;
 

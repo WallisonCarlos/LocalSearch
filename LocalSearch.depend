@@ -15,3 +15,33 @@
 
 1541765674 /home/wallison/Documentos/LocalSearch/include/Utils.h
 
+1541870285 source:/home/wallison/Documentos/CodeBlocks/LocalSearch/main.cpp
+	<iostream>
+	<State.h>
+	<HillClimbing.h>
+	<SimulatedAnnealing.h>
+	<stdlib.h>
+	<stdio.h>
+
+1541865722 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/State.h
+	<queue>
+	<Utils.h>
+	<Compare.h>
+
+1541865376 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/Utils.h
+
+1541865866 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/Compare.h
+	<State.h>
+
+1541866067 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/HillClimbing.h
+	<State.h>
+	<limits.h>
+	<queue>
+
+1541871069 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/SimulatedAnnealing.h
+	<State.h>
+	<math.h>
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+

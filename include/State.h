@@ -1,8 +1,10 @@
 #ifndef STATE_H
 #define STATE_H
 
-#include <vector>
+#include <queue>
 #include <Utils.h>
+#include <Compare.h>
+
 Utils utils;
 
 typedef struct State{
@@ -62,32 +64,6 @@ typedef struct State{
         }
     }
 
-    std::vector<State> successors() {
-
-        std::vector<State> successors;
-        int b[size];
-
-        for (unsigned int i = 0;i < size;i++) {
-
-            utils.copy(b, board, size);
-
-            for (unsigned int j = 0;j < size;j++) {
-
-                if (!(b[i] == j)) {
-                    b[i] = j;
-                    successors.push_back(State(size, b));
-                    //successors.back().print();
-                    //printf("Weight: %d\n", successors.back().getHeuristic());
-                    //successors.back().inAttack();
-                    //printf("\n");
-                }
-
-            }
-
-        }
-
-        return successors;
-    }
 
     void print() {
 
@@ -107,6 +83,7 @@ typedef struct State{
     }
 
 } State;
+
 
 
 #endif // STATE_H

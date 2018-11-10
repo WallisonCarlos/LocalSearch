@@ -3,7 +3,11 @@
 
 #include <State.h>
 #include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 
+#define RANDOM_ZERO_UNTIL_ONE ((float)(random())/(float)(RAND_MAX))
 
 typedef struct SimulatedAnnealing {
 
@@ -11,12 +15,19 @@ typedef struct SimulatedAnnealing {
 
         State solution = start;
 
-        float temperature = 1.0f;
+        float temperature = 100.0f;
 
         while (temperature > 0.1f) {
 
-            State neighbor = randomNeighbor(solution);
 
+            State neighbor = randomNeighbor(solution);
+            printf("\n----------------------Compare----------------------------\n");
+            printf("-----------Solution-------------\n");
+            solution.print();
+            printf("\nWeight: %d", solution.getHeuristic());
+            printf("\n-----------Neighbor-------------\n");
+            neighbor.print();
+            printf("\nWeight: %d", neighbor.getHeuristic());
             if (neighbor.getHeuristic() < solution.getHeuristic()) {
 
                 solution = neighbor;
@@ -26,15 +37,17 @@ typedef struct SimulatedAnnealing {
                 }
 
             } else {
-
-                int probability = pow(M_E, (-neighbor.getHeuristic/temperature));
-
-                if (probability > 0.7f) {
+                printf("\n---------------------Calcs---------------------\n");
+                float probability = powf(M_E, (float)(-solution.getHeuristic()/temperature));
+                std::cout << probability << std::endl;
+                printf("Probability: %f\n", probability);
+                if (probability > RANDOM_ZERO_UNTIL_ONE) {
+                    printf("trocou");
                     solution = neighbor;
                 }
             }
 
-            temperature *= 0.009f;
+            temperature *= 0.9f;
         }
 
         return solution;
@@ -43,16 +56,23 @@ typedef struct SimulatedAnnealing {
     State randomNeighbor (State state) {
 
         State neighbor;
-        int changes = random() % state.size;
-        int *board = (int *) malloc(size * sizeof(int));
+
+        srand((unsigned int) time(NULL));
+
+        int changes = rand() % state.size;
+
+        if (changes == 0) {
+            changes++;
+        }
+
+        int *board = (int *) malloc(state.size * sizeof(int));
 
         utils.copy(board, state.board, state.size);
 
-        for (unsigned int i = 0;i <changes;i++) {
+        for (unsigned int i = 0;i < changes;i++) {
 
-            int row = random() % state.size;
-            int col = random() % state.size;
-
+            int row = rand() % state.size;
+            int col = rand() % state.size;
             board[row] = col;
 
         }
