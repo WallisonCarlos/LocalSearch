@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="include/HillClimbing.h" />
 		<Unit filename="include/SimulatedAnnealing.h" />
+		<Unit filename="include/SparseMatrix.h" />
 		<Unit filename="include/State.h" />
 		<Unit filename="include/Utils.h" />
 		<Unit filename="main.cpp" />

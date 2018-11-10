@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
+#include <Queen.h>
 
 #define RANDOM_ZERO_UNTIL_ONE ((float)(random())/(float)(RAND_MAX))
 
@@ -65,7 +66,7 @@ typedef struct SimulatedAnnealing {
             changes++;
         }
 
-        int *board = (int *) malloc(state.size * sizeof(int));
+        Queen *board = (Queen *) malloc(state.size * sizeof(Queen));
 
         utils.copy(board, state.board, state.size);
 
@@ -73,7 +74,7 @@ typedef struct SimulatedAnnealing {
 
             int row = rand() % state.size;
             int col = rand() % state.size;
-            board[row] = col;
+            board[row].col = col;
 
         }
 

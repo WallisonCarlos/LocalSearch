@@ -2,6 +2,7 @@
 #include <State.h>
 #include <HillClimbing.h>
 #include <SimulatedAnnealing.h>
+#include <Queen.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -9,23 +10,34 @@
 using namespace std;
 
 State generateRandomState (unsigned int size) {
+
     State state(size);
     srand((unsigned int) time(NULL));
+
     for (unsigned int i = 0;i < size;i++) {
-        state.board[i] = rand() % size;
+
+        Queen q(rand() % size, rand() % size);
+
+        while (!utils.valid(q, state.board, size)) {
+          q = Queen(rand() % size, rand() % size);
+        }
+
+        state.board[i] = q;
     }
+
     return state;
 }
 
 
 int main() {
-    int n = 8, algorithm = 0;
+    int n = 4, algorithm = 0;
     State start = generateRandomState(n);
     HillClimbing hillClimbing;
     SimulatedAnnealing simulatedAnnealing;
     printf("\n---------Start State---------\n");
     start.print();
     start.inAttack();
+
     State goal;
 
     if (algorithm) {

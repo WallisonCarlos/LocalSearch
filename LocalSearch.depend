@@ -45,3 +45,38 @@
 	<stdio.h>
 	<iostream>
 
+1541882764 source:/home/wallison/Documentos/CodeBlocks/LocalSearch2/main.cpp
+	<iostream>
+	<State.h>
+	<HillClimbing.h>
+	<SimulatedAnnealing.h>
+	<Queen.h>
+	<stdlib.h>
+	<stdio.h>
+
+1541879915 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/State.h
+	<queue>
+	<Utils.h>
+	<Queen.h>
+
+1541885083 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/Utils.h
+	<Queen.h>
+
+1541865866 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/Compare.h
+	<State.h>
+
+1541880102 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/HillClimbing.h
+	<State.h>
+	<limits.h>
+	<Queen.h>
+
+1541880163 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/SimulatedAnnealing.h
+	<State.h>
+	<math.h>
+	<stdlib.h>
+	<stdio.h>
+	<iostream>
+	<Queen.h>
+
+1541879979 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/Queen.h
+

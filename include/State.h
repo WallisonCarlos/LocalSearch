@@ -3,41 +3,41 @@
 
 #include <queue>
 #include <Utils.h>
-#include <Compare.h>
+#include <Queen.h>
 
 Utils utils;
 
 typedef struct State{
 
-    int *board;
+    Queen *board;
     unsigned int size;
     int heuristic = -1;
     State () {
-        board = (int *) malloc(4*sizeof(int));
+        board = (Queen *) malloc(4*sizeof(Queen));
         size = 4;
     }
 
     State (unsigned int n) {
         this->size = n;
-        this->board = (int*) malloc(n*(sizeof(int)));
+        this->board = (Queen*) malloc(n*(sizeof(Queen)));
     }
 
-    State (int n, int *b) {
+    State (int n, Queen *b) {
         this->size = n;
-        this->board = (int *) malloc(size*sizeof(int));
+        this->board = (Queen *) malloc(size*sizeof(Queen));
         utils.copy(board, b, size);
     }
 
     void inAttack () {
         for (unsigned int i = 0;i < size;i++) {
             for (unsigned int j = i+1;j < size;j++) {
-                if (board[i] == board[j]) {
-                    printf("(%d, %d) ", i, board[i]);
+                if (board[i].row == board[j].row || board[i].col == board[j].col) {
+                    printf("(%d, %d) ", board[i].row, board[i].col);
                 }
                 int offset = j - i;
 
-                if (board[i] == board[j] - offset || board[i] == board[j] + offset) {
-                    printf("(%d, %d) ", i, board[i]);
+                if (board[i].col == board[j].col - offset || board[i].col == board[j].col + offset) {
+                    printf("(%d, %d) ", board[i].row, board[i].col);
                 }
             }
         }
@@ -49,17 +49,23 @@ typedef struct State{
         } else {
             int h = 0;
             for (unsigned int i = 0;i < size;i++) {
+
                 for (unsigned int j = i+1;j < size;j++) {
-                    if (board[i] == board[j]) {
+
+                    if (board[i].row == board[j].row || board[i].col == board[j].col) {
                         h += 1;
                     }
+
                     int offset = j - i;
 
-                    if (board[i] == board[j] - offset || board[i] == board[j] + offset) {
+                    if (board[i].col == board[j].col - offset || board[i].col == board[j].col + offset) {
                         h += 1;
                     }
+
                 }
+
             }
+
             return heuristic = h;
         }
     }
@@ -70,7 +76,7 @@ typedef struct State{
         for (unsigned int i = 0;i < size;i++) {
 
             for (unsigned int j = 0;j < size;j++) {
-                if (board[i] == j) {
+                if (board[i].col == j) {
                     printf("[Q]");
                 } else {
                     printf("[ ]");

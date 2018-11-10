@@ -3,7 +3,8 @@
 
 #include <State.h>
 #include <limits.h>
-#include <queue>
+#include <Queen.h>
+
 
 typedef struct HillClimbing {
 
@@ -39,7 +40,7 @@ typedef struct HillClimbing {
     State successor(State state) {
 
         State successor = state;
-        int b[state.size];
+        Queen* b = (Queen *) malloc(state.size * sizeof(Queen));
 
         for (unsigned int i = 0;i < state.size;i++) {
 
@@ -47,9 +48,9 @@ typedef struct HillClimbing {
 
             for (unsigned int j = 0;j < state.size;j++) {
 
-                if (!(b[i] == j)) {
+                if (!(b[i].col == j)) {
 
-                    b[i] = j;
+                    b[i].col = j;
                     State next(state.size, b);
 
                     if (next.getHeuristic() < state.getHeuristic()) {
