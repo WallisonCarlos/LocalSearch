@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1541851354 source:/home/wallison/Documentos/LocalSearch/main.cpp
+	<iostream>
+	<State.h>
+	<HillClimbing.h>
+
+1541851343 /home/wallison/Documentos/LocalSearch/include/State.h
+	<vector>
+	<Utils.h>
+
+1541851417 /home/wallison/Documentos/LocalSearch/include/HillClimbing.h
+	<State.h>
+	<limits.h>
+	<vector>
+
+1541765674 /home/wallison/Documentos/LocalSearch/include/Utils.h
+
