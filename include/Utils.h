@@ -18,7 +18,21 @@ typedef struct Utils {
         for (unsigned int i = 0;i < size;i++) {
 
 
-            if ((queen.row == board[i].row && board[i].col)) {
+            if ((queen.row == board[i].row && board[i].col == queen.col)) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    bool validCol(Queen queen, Queen *board, unsigned int size) {
+
+        for (unsigned int i = 0;i < size;i++) {
+
+
+            if (board[i].col == queen.col) {
                 return false;
             }
 

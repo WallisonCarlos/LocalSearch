@@ -45,7 +45,7 @@
 	<stdio.h>
 	<iostream>
 
-1541882764 source:/home/wallison/Documentos/CodeBlocks/LocalSearch2/main.cpp
+1541885481 source:/home/wallison/Documentos/CodeBlocks/LocalSearch2/main.cpp
 	<iostream>
 	<State.h>
 	<HillClimbing.h>
@@ -59,13 +59,13 @@
 	<Utils.h>
 	<Queen.h>
 
-1541885083 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/Utils.h
+1541886438 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/Utils.h
 	<Queen.h>
 
 1541865866 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/Compare.h
 	<State.h>
 
-1541880102 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/HillClimbing.h
+1541893094 /home/wallison/Documentos/CodeBlocks/LocalSearch2/include/HillClimbing.h
 	<State.h>
 	<limits.h>
 	<Queen.h>
