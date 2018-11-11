@@ -12,6 +12,7 @@ typedef struct State{
     Queen *board;
     unsigned int size;
     int heuristic = -1;
+
     State () {
         board = (Queen *) malloc(4*sizeof(Queen));
         size = 4;
@@ -29,17 +30,21 @@ typedef struct State{
     }
 
     void inAttack () {
+        printf("\nIn Attack:\n");
         for (unsigned int i = 0;i < size;i++) {
-            for (unsigned int j = i+1;j < size;j++) {
-                if (board[i].row == board[j].row || board[i].col == board[j].col) {
-                    printf("(%d, %d) ", board[i].row, board[i].col);
-                }
-                int offset = j - i;
 
-                if (board[i].col == board[j].col - offset || board[i].col == board[j].col + offset) {
-                    printf("(%d, %d) ", board[i].row, board[i].col);
+            for (unsigned int j = i+1;j < size;j++) {
+
+                if (board[i].row == board[j].row || board[i].col == board[j].col) {
+                    printf("(%d, %d) ", board[j].row, board[j].col);
                 }
+
+                if (board[i].diagPri == board[j].diagPri || board[i].diagSec == board[j].diagSec) {
+                    printf("(%d, %d) ", board[j].row, board[j].col);
+                }
+
             }
+
         }
     }
 
@@ -56,9 +61,7 @@ typedef struct State{
                         h += 1;
                     }
 
-                    int offset = j - i;
-
-                    if (board[i].col == board[j].col - offset || board[i].col == board[j].col + offset) {
+                    if (board[i].diagPri == board[j].diagPri || board[i].diagSec == board[j].diagSec) {
                         h += 1;
                     }
 
@@ -70,13 +73,19 @@ typedef struct State{
         }
     }
 
-
     void print() {
 
         for (unsigned int i = 0;i < size;i++) {
 
             for (unsigned int j = 0;j < size;j++) {
-                if (board[i].col == j) {
+                bool isQueen = false;
+                for (unsigned int k = 0;k < size;k++) {
+                    if (board[k].row == i && board[k].col == j) {
+                        isQueen = true;
+                        break;
+                    }
+                }
+                if (isQueen) {
                     printf("[Q]");
                 } else {
                     printf("[ ]");
@@ -85,7 +94,7 @@ typedef struct State{
 
             printf("\n");
         }
-
+        printf("Heuristic: %d\n", getHeuristic());
     }
 
 } State;

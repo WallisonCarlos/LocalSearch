@@ -41,6 +41,8 @@ typedef struct Utils {
         return true;
     }
 
+
+
 } Utils;
 
 #endif // UTILS_H

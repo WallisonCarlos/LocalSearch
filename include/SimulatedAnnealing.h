@@ -74,7 +74,15 @@ typedef struct SimulatedAnnealing {
 
             int row = rand() % state.size;
             int col = rand() % state.size;
-            board[row].col = col;
+            Queen q(row, col);
+
+            while (!utils.valid(q, board, state.size)){
+
+                int row = rand() % state.size;
+                int col = rand() % state.size;
+                board[i] = q;
+
+            }
 
         }
 

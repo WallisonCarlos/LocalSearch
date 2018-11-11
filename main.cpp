@@ -19,7 +19,7 @@ State generateRandomState (unsigned int size) {
         Queen q(rand() % size, rand() % size);
 
         while (!utils.valid(q, state.board, size)) {
-          q = Queen(rand() % size, rand() % size);
+            q = Queen(rand() % size, rand() % size);
         }
 
         state.board[i] = q;
@@ -30,7 +30,7 @@ State generateRandomState (unsigned int size) {
 
 
 int main() {
-    int n = 4, algorithm = 0;
+    int n = 8, algorithm = 0;
     State start = generateRandomState(n);
     HillClimbing hillClimbing;
     SimulatedAnnealing simulatedAnnealing;

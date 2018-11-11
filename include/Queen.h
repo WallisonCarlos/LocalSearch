@@ -4,12 +4,16 @@
 
 typedef struct Queen {
 
-    int row;
-    int col;
+    int row = 0;
+    int col = 0;
+    int diagPri = 0;
+    int diagSec = 0;
 
     Queen (int r, int c) {
         row = r;
         col = c;
+        diagPri = row - col;
+        diagSec = row + col;
     }
 
 } Queen;

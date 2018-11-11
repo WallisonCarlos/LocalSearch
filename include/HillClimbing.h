@@ -11,9 +11,10 @@ typedef struct HillClimbing {
     State search (State start) {
 
         State currentState = start;
-
+        int i = 0;
+        int plato = 0;
         while (true) {
-
+            printf("\n\n------------------Laço %d----------------\n", i);
             int nextVal = INT_MAX;
             State nextState;
             State s = successor(currentState);
@@ -25,15 +26,12 @@ typedef struct HillClimbing {
 
             }
 
-            /*printf("--------------------Estado escolhido: --------------------\n");
-            nextState.print();
-            printf("\nWeight: %d \n", nextState.getHeuristic());
-            printf("-----------------------------------------------------------s");*/
-
             if (nextVal >= currentState.getHeuristic()) {
                 return currentState;
             }
+
             currentState = nextState;
+            i++;
         }
     }
 
@@ -53,17 +51,26 @@ typedef struct HillClimbing {
             //Movimentar a Rainha na linha e na coluna
             for (unsigned int j = 1;j < state.size;j++) {
 
-
+                int newCol = aux.col + j;
                 //Verifica se movimento da direita da coluna é válido e cria estado sucesso
-                if (aux.col + j < maxCol && aux.col + j < state.size) {
-                    aux.col = aux.col + j;
+                if ((newCol < maxCol) && (newCol < state.size)) {
+
+                    aux.col = newCol;
+
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Col-Right-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
                     } else {
                         maxCol = aux.col;
@@ -72,21 +79,26 @@ typedef struct HillClimbing {
 
                 b[i] = backup;
                 aux = backup;
-
+                newCol = aux.col - j;
                 //Verifica se movimento da esquerda da coluna é válido e cria estado sucesso
-                if (aux.col - j > minCol && aux.col - j >= 0) {
-
-                    aux.col = aux.col - j;
+                if ((newCol > minCol) && (newCol > -1)) {
+                    aux.col = newCol;
                     //Verifica se movimento da esquerda da coluna é válido e cria estado sucesso
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Col-Left-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
-
                     } else {
                         minCol = aux.col;
                     }
@@ -94,18 +106,26 @@ typedef struct HillClimbing {
 
                 b[i] = backup;
                 aux = backup;
+                int newRow = aux.row + j;
                 //Verifica se movimento para baixo da linha é válido e cria estado sucesso
-                if (aux.row + j < maxRow && aux.row < state.size) {
+                if ((newRow < maxRow) && (newRow < state.size)) {
 
-                    aux.row = aux.row + j;
+                    aux.row = newRow;
                     //Verifica se movimento para baixo da linha é válido e cria estado sucesso
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Line-Down-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
                     } else {
                         maxRow = aux.row;
@@ -114,39 +134,58 @@ typedef struct HillClimbing {
 
                 b[i] = backup;
                 aux = backup;
+                newRow = aux.row - j;
+                //printf("\nAux top: %d e j: %d newRow: %d minRow: %d\n ", aux.row, j, newRow, minRow);
                 //Verifica se movimento para cima da linha é válido e cria estado sucesso
-                if (aux.row - j > minRow && aux.row >= 0) {
-
-                    aux.row = aux.row - j;
+                if ((newRow > minRow) && (newRow > -1)) {
+                    //printf("\nAux top: %d e j: %d minRow: %d\n ", aux.row, j, minRow);
+                    aux.row = newRow;
                     //Verifica se movimento para baixo da linha é válido e cria estado sucesso
                     if (utils.valid(aux, state.board, state.size)) {
-
+                        printf("Aqui\n");
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Line-Top-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
                     } else {
+                        printf("Não, aqui\n");
                         minRow = aux.row;
                     }
                 }
 
                 b[i] = backup;
                 aux = backup;
+                int newColPri = aux.col - j;
+                int newRowPri = aux.row - j;
                 //Verifica se movimento para cima da diagonal principal é válido e cria estado sucesso
-                if ((aux.row - j > minPri && aux.col - j> minPri) && (aux.row - j >= 0 && aux.col - j >= 0)) {
+                if ((newRowPri > minPri && newColPri > minPri) && (newRowPri> -1 && newColPri > -1)) {
 
-                    aux.row = aux.row - j;
-                    aux.col = aux.col - j;
+                    aux.row = newRowPri;
+                    aux.col = newColPri;
                     //Valida posição e cria novo estado
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Diag-Pri-Top-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
 
                     } else {
@@ -156,19 +195,28 @@ typedef struct HillClimbing {
 
                 b[i] = backup;
                 aux = backup;
+                newColPri = aux.col + j;
+                newRowPri = aux.row + j;
                 //Verifica se movimento para baixo da digagonal principal é válido e cria estado sucesso
-                if ((aux.row + j < maxPri && aux.col + j < maxPri) && (aux.row + j < state.size && aux.col + j < state.size)) {
+                if ((newRowPri < maxPri && newColPri < maxPri) && (newRowPri < state.size && newColPri < state.size)) {
 
-                    aux.row = aux.row + j;
-                    aux.col = aux.col + j;
+                    aux.row = newRowPri;
+                    aux.col = newColPri;
                     //Valida posição e cria novo estado
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Diag-pri-Down-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
 
                     } else {
@@ -178,19 +226,28 @@ typedef struct HillClimbing {
 
                 b[i] = backup;
                 aux =  backup;
+                int newRowSec = aux.row - j;
+                int newColSec = aux.col + j;
                 //Verifica se movimento para cima da digagonal secundária é válido e cria estado sucesso
-                if ((aux.col + j < maxSec) && aux.row - j >= 0 && aux.col + j < state.size) {
+                if ((newColSec < maxSec) && newRowSec > -1 && newColSec < state.size) {
 
-                    aux.row = aux.row - j;
-                    aux.col = aux.col + j;
+                    aux.row = newRowSec;
+                    aux.col = newColSec;
                     //Valida posição e cria novo estado
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Diag-Sec-Top-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
 
                     } else  {
@@ -200,19 +257,28 @@ typedef struct HillClimbing {
 
                 b[i] = backup;
                 aux =  backup;
+                newRowSec = aux.row + j;
+                newColSec = aux.col - j;
                 //Verifica se movimento para baixo da digagonal secundária é válido e cria estado sucesso
-                if ((aux.col - j < minSec) && aux.row + j < state.size && aux.col - j >= 0) {
+                if ((newColSec > minSec) && (newRowSec < state.size && newColSec > -1)) {
 
-                    aux.row = aux.row + j;
-                    aux.col = aux.col - j;
+                    aux.row = newRowSec;
+                    aux.col = newColSec;
                     //Valida posição e cria novo estado
                     if (utils.valid(aux, state.board, state.size)) {
 
                         b[i] = aux;
                         State next(state.size, b);
-
+                        printf("\n------------Diag-Sec-Down-------------\n");
+                        printf("Sucessor atual: \n");
+                        successor.print();
+                        printf("Next: \n");
+                        next.print();
                         if (next.getHeuristic() < state.getHeuristic()) {
                             successor = next;
+                            printf("Next\n");
+                        } else {
+                            printf("Atual\n");
                         }
 
                     } else  {
