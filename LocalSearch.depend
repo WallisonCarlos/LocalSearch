@@ -38,7 +38,7 @@
 	<limits.h>
 	<queue>
 
-1541871069 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/SimulatedAnnealing.h
+1541949646 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/SimulatedAnnealing.h
 	<State.h>
 	<math.h>
 	<stdlib.h>

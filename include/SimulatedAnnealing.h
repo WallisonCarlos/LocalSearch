@@ -15,9 +15,9 @@ typedef struct SimulatedAnnealing {
 
         State solution = start;
 
-        float temperature = 100.0f;
+        float temperature = 1000.0f;
 
-        while (temperature > 0.1f) {
+        while (temperature > 0.00001f) {
 
 
             State neighbor = randomNeighbor(solution);
@@ -28,7 +28,8 @@ typedef struct SimulatedAnnealing {
             printf("\n-----------Neighbor-------------\n");
             neighbor.print();
             printf("\nWeight: %d", neighbor.getHeuristic());
-            if (neighbor.getHeuristic() < solution.getHeuristic()) {
+            int dE = neighbor.getHeuristic() - solution.getHeuristic();
+            if (dE <= 0) {
 
                 solution = neighbor;
 
@@ -38,10 +39,10 @@ typedef struct SimulatedAnnealing {
 
             } else {
                 printf("\n---------------------Calcs---------------------\n");
-                float probability = powf(M_E, (float)(-solution.getHeuristic()/temperature));
+                float probability = powf(M_E, (float)(-dE/temperature));
                 std::cout << probability << std::endl;
                 printf("Probability: %f\n", probability);
-                if (probability > RANDOM_ZERO_UNTIL_ONE) {
+                if (probability > 0.9f) {
                     printf("trocou");
                     solution = neighbor;
                 }
@@ -57,7 +58,7 @@ typedef struct SimulatedAnnealing {
 
         State neighbor;
 
-        srand((unsigned int) time(NULL));
+        //srand((unsigned int) time(NULL));
 
         int changes = rand() % state.size;
 

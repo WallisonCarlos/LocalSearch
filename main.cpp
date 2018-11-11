@@ -19,7 +19,7 @@ State generateRandomState (unsigned int size) {
 
 
 int main() {
-    int n = 8, algorithm = 0;
+    int n = 8, algorithm = 1;
     State start = generateRandomState(n);
     HillClimbing hillClimbing;
     SimulatedAnnealing simulatedAnnealing;
