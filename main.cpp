@@ -22,6 +22,7 @@ int main() {
     int n = 8, algorithm = 1;
     State start = generateRandomState(n);
     HillClimbing hillClimbing;
+    hillClimbing.durationRandomRestart = 10000;
     SimulatedAnnealing simulatedAnnealing;
     printf("\n---------Start State---------\n");
     start.print();
@@ -29,7 +30,7 @@ int main() {
     State goal;
 
     if (algorithm) {
-        goal = hillClimbing.search(start);
+        goal = hillClimbing.searchRandomRestart(start);
     } else {
         goal = simulatedAnnealing.search(start);
     }

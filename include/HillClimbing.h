@@ -7,13 +7,15 @@
 
 typedef struct HillClimbing {
 
+    int durationRandomRestart;
+
     State search (State start) {
 
         State currentState = start;
+        int nextVal = INT_MAX;
 
         while (true) {
 
-            int nextVal = INT_MAX;
             State nextState;
             State s = successor(currentState);
 
@@ -24,16 +26,59 @@ typedef struct HillClimbing {
 
             }
 
-            /*printf("--------------------Estado escolhido: --------------------\n");
-            nextState.print();
-            printf("\nWeight: %d \n", nextState.getHeuristic());
-            printf("-----------------------------------------------------------s");*/
-
             if (nextVal >= currentState.getHeuristic()) {
                 return currentState;
             }
             currentState = nextState;
         }
+    }
+
+    State searchRandomRestart(State start) {
+
+        State best = start;
+
+        int nextVal = INT_MAX;
+
+        while (true) {
+
+            int timeStart = time(NULL);
+
+            while (true) {
+
+                State r = successor(start);
+
+                if (r.getHeuristic() < start.getHeuristic()) {
+                    start = r;
+                }
+
+                if (start.getHeuristic() ==  0 || (timeStart + durationRandomRestart) >= time(NULL)) {
+                    break;
+                }
+            }
+
+            if (start.getHeuristic() < best.getHeuristic()) {
+                best = start;
+            }
+
+            start = generateRandomState(start.size);
+
+            if (start.getHeuristic() == 0 || (timeStart + durationRandomRestart) >= time(NULL)) {
+                break;
+            }
+        }
+        return best;
+    }
+
+   State generateRandomState (unsigned int size) {
+
+        State state(size);
+        srand((unsigned int) time(NULL));
+
+        for (unsigned int i = 0;i < size;i++) {
+            state.board[i] = rand() % size;
+        }
+
+        return state;
     }
 
     State successor(State state) {

@@ -15,7 +15,7 @@
 
 1541765674 /home/wallison/Documentos/LocalSearch/include/Utils.h
 
-1541870285 source:/home/wallison/Documentos/CodeBlocks/LocalSearch/main.cpp
+1541950020 source:/home/wallison/Documentos/CodeBlocks/LocalSearch/main.cpp
 	<iostream>
 	<State.h>
 	<HillClimbing.h>
@@ -33,7 +33,7 @@
 1541865866 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/Compare.h
 	<State.h>
 
-1541866067 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/HillClimbing.h
+1542591349 /home/wallison/Documentos/CodeBlocks/LocalSearch/include/HillClimbing.h
 	<State.h>
 	<limits.h>
 	<queue>
