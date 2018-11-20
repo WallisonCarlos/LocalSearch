@@ -8,6 +8,7 @@
 typedef struct HillClimbing {
 
     int durationRandomRestart;
+    int maxIterations = INT_MAX;
 
     State search (State start) {
 
@@ -31,6 +32,40 @@ typedef struct HillClimbing {
             }
             currentState = nextState;
         }
+    }
+
+    State random(State start) {
+
+        State current = start;
+        State best = start;
+        int iterations = 0;
+
+        while (true) {
+
+            State next = successor(current);
+
+            if (next.getHeuristic() < current.getHeuristic()) {
+
+                current = next;
+                best = current;
+
+            } else {
+
+                current = generateRandomState(current.size);
+
+                if (current.getHeuristic() < best.getHeuristic()) {
+                    best = current;
+                }
+
+            }
+
+            if (best.getHeuristic() == 0 || iterations == maxIterations) {
+                break;
+            }
+
+        }
+
+        return best;
     }
 
     State searchRandomRestart(State start) {

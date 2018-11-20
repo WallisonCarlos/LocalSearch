@@ -19,7 +19,7 @@ State generateRandomState (unsigned int size) {
 
 
 int main() {
-    int n = 8, algorithm = 1;
+    int n = 2092, algorithm = 1;
     State start = generateRandomState(n);
     HillClimbing hillClimbing;
     hillClimbing.durationRandomRestart = 10000;
@@ -30,7 +30,7 @@ int main() {
     State goal;
 
     if (algorithm) {
-        goal = hillClimbing.searchRandomRestart(start);
+        goal = hillClimbing.search(start);
     } else {
         goal = simulatedAnnealing.search(start);
     }

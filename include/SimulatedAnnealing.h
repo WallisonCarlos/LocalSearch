@@ -17,7 +17,7 @@ typedef struct SimulatedAnnealing {
 
         float temperature = 1000.0f;
 
-        while (temperature > 0.00001f) {
+        while (true) {
 
 
             State neighbor = randomNeighbor(solution);
@@ -42,7 +42,7 @@ typedef struct SimulatedAnnealing {
                 float probability = powf(M_E, (float)(-dE/temperature));
                 std::cout << probability << std::endl;
                 printf("Probability: %f\n", probability);
-                if (probability > 0.9f) {
+                if (probability > 0.7f) {
                     printf("trocou");
                     solution = neighbor;
                 }
